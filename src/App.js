@@ -1,28 +1,83 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, {useEffect,useState} from 'react';
+import Recette from './Recette'
 import './App.css';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+
+const App = ()=>{
+  const KEY_ID = '69a52390c38ff814735bc267e4a7da01';
+  const APP_ID ='6a3ffc40';
+
+
+  const [recettes, setRecettes] =useState([]);
+  const[query, setQuery] = useState("beef");
+  const[search,setSearch]=useState('');
+  const [diet,setDiet]=useState('balanced');
+  const request = `https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${KEY_ID}&diet=${diet}`;
+
+  const updatesearch = e=>{
+    setSearch(e.target.value);
+    console.log(search);
+  };
+
+const updateQuery = e =>{
+  e.preventDefault();
+  setQuery(search);
+  setSearch('');
+};
+
+const updateDiet =value=>{
+  if(value != null){
+    setDiet(value);
+    console.log(request);
   }
+
+
+};
+
+  useEffect(function(){
+        getData();
+      }, [query]
+  );
+  const getData = async () =>{
+    const response = await fetch(request);
+    const data = await response.json();
+    console.log(data.hits);
+    setRecettes(data.hits);
+  };
+
+  return(
+      <div className="App">
+        <div className="Title">
+          <h1>Recettes Healhty</h1>
+        </div>
+        <form className="search-form" onSubmit={updateQuery}>
+          <input className="search-bar" type="text" value={search} onChange={updatesearch}/>
+          <button className="search-button" type="submit">Rechercher</button>
+            <label htmlFor={"balenced"}>Balenced diet</label>
+            <input type={"radio"} name="dietType" value="balanced" id={"balenced"} onClick={()=> updateDiet("balenced")}></input>
+            <label htmlFor="high_protein">High protein diet</label>
+            <input type={"radio"} name="dietType" value={"high-protein"} id="high_protein" onClick={()=> updateDiet("high-protein")}></input>
+            <label htmlFor="low-fat">Low Fat diet</label>
+          <input type={"radio"} name="dietType" value={"low-fat"} id="low-fat" onClick={()=>updateDiet("low-fat")}></input>
+        </form>
+        <div className="recettes">
+        {recettes.map(recette=>(
+            <Recette
+            key={recette.recipe.label}
+            titre={recette.recipe.label}
+            calories={recette.recipe.calories}
+            glucides={recette.recipe.totalNutrients['CHOCDF']}
+            proteines={recette.recipe.totalNutrients['PROCNT']}
+            lipides={recette.recipe.totalNutrients['FAT']}
+            image={recette.recipe.image}
+            url={recette.recipe.url}
+            ingredients={recette.recipe.ingredients}
+            />
+        ))}
+        </div>
+      </div>
+  );
 }
+
 
 export default App;
