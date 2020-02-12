@@ -32,17 +32,16 @@ const App = () => {
 
   useEffect(
     function() {
+      const getData = async () => {
+        const response = await fetch(request);
+        const data = await response.json();
+        console.log(data.hits);
+        setRecettes(data.hits);
+      };
       getData();
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     },
-    [query]
+    [request]
   );
-  const getData = async () => {
-    const response = await fetch(request);
-    const data = await response.json();
-    console.log(data.hits);
-    setRecettes(data.hits);
-  };
 
   return (
     <div className="App">
