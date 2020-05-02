@@ -12,18 +12,18 @@ const App = () => {
   const [diet, setDiet] = useState("balanced");
   const request = `https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${KEY_ID}&diet=${diet}`;
 
-  const updatesearch = e => {
+  const updatesearch = (e) => {
     setSearch(e.target.value);
     console.log(search);
   };
 
-  const updateQuery = e => {
+  const updateQuery = (e) => {
     e.preventDefault();
     setQuery(search);
     setSearch("");
   };
 
-  const updateDiet = value => {
+  const updateDiet = (value) => {
     if (value != null) {
       setDiet(value);
       console.log(request);
@@ -31,7 +31,7 @@ const App = () => {
   };
 
   useEffect(
-    function() {
+    function () {
       const getData = async () => {
         const response = await fetch(request);
         const data = await response.json();
@@ -84,9 +84,9 @@ const App = () => {
         ></input>
       </form>
       <div className="recettes">
-        {recettes.map(recette => (
+        {recettes.map((recette, index) => (
           <Recette
-            key={recette.recipe.label}
+            key={index}
             titre={recette.recipe.label}
             calories={recette.recipe.calories}
             glucides={recette.recipe.totalNutrients["CHOCDF"]}

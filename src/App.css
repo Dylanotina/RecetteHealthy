@@ -40,10 +40,15 @@ label {
   font-size: large;
 }
 
+.recettes {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
 .recettes a {
   display: flex;
   justify-content: space-evenly;
-  width: 40%;
+  width: 75%;
   align-items: center;
   max-height: fit-content;
 }

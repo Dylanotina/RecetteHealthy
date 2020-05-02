@@ -18,18 +18,24 @@
 }
 .recipe:hover {
   background: lightgrey;
+  cursor: pointer;
 }
 .recipe h1 {
-  width: 50%;
+  width: 100%;
+  padding: 20px 0px;
 }
 
-.lien {
+.recipe a {
   text-decoration: none;
-  color: black;
+  color: lightgray;
+}
+
+.recipe p {
+  padding-bottom: 20px;
 }
 
 img {
-  height: 100px;
-  width: 100px;
+  height: 200px;
+  width: 200px;
   border-radius: 20px;
 }
