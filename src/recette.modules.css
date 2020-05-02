@@ -17,7 +17,7 @@
   padding: 0;
 }
 .recipe:hover {
-  background: lightgrey;
+  background: rgb(226, 226, 226);
   cursor: pointer;
 }
 .recipe h1 {
@@ -27,7 +27,7 @@
 
 .recipe a {
   text-decoration: none;
-  color: lightgray;
+  color: black;
 }
 
 .recipe p {
