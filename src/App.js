@@ -3,8 +3,9 @@ import Recette from "./Recette";
 import "./App.css";
 
 const App = () => {
-  const KEY_ID = process.env.REACT_APP_KEY_ID;
-  const APP_ID = process.env.REACT_APP_APP_ID;
+  
+  const KEY_ID = process.env.REACT_APP_KEY_ID || "69a52390c38ff814735bc267e4a7da01";
+  const APP_ID = process.env.REACT_APP_APP_ID || "6a3ffc40";
 
   const [recettes, setRecettes] = useState([]);
   const [query, setQuery] = useState("beef");

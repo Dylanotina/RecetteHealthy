@@ -21,11 +21,7 @@
   padding: 10px 20px;
   color: white;
 }
-.recettes {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-}
+
 label {
   margin: 5px;
 }
@@ -41,8 +37,10 @@ label {
 }
 
 .recettes {
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  display: grid;
+  grid-template-columns: 33% 33% auto;
   gap: 1rem;
+  padding-left: 5%;
 }
 
 .recettes a {
